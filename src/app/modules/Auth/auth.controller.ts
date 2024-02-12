@@ -1,5 +1,5 @@
 import httpStatus from 'http-status';
-// import config from '../../config';
+import config from '../../config';
 import AppError from '../../errors/AppError';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
@@ -10,9 +10,9 @@ const loginUser = catchAsync(async (req, res) => {
   const { refreshToken, accessToken, needsPasswordChange } = result;
 
   res.cookie('refreshToken', refreshToken, {
-    // secure: config.NODE_ENV === 'production',
+    secure: config.NODE_ENV === 'production',
     httpOnly: true,
-    secure: true,
+    // secure: true,
     sameSite: 'none',
     maxAge: 1000 * 60 * 60 * 24 * 365,
   });
